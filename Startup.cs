@@ -57,6 +57,10 @@ namespace BangazonAPI
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseFileServer(enableDirectoryBrowsing: true);
+
             app.UseMvc();
         }
     }

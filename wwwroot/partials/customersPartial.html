@@ -1,0 +1,17 @@
+﻿<button ng-click="getCustomers()">Get All customers</button>
+<button ng-click="postCustomer()">Post this customer</button>
+<button ng-click="putCustomer()">Replace an old customer</button>
+<p>Make a new customer</p>
+<input type="text" ng-model="newCustomerFirstName" placeholder="First Name" />
+<input type="text" ng-model="newCustomerLastName" placeholder="Last Name" />
+<p>Update Customer Info</p>
+<input type="text" ng-model="editCustomerFirstName" placeholder="New First Name" />
+<input type="text" ng-model="editCustomerLastName" placeholder="New Last Name" />
+<input type="number" ng-model="editCustomerID" placeholder="ID" />
+
+<div ng-repeat="customer in customers">
+    <button ng-click="deleteCustomer()">Delete this Customer</button>
+    <div>First Name : {{customer.firstName}}</div>
+    <div>Last Name : {{customer.lastName}}</div>
+    <div>Customer id :{{customer.customerId}}</div> <br />
+</div>

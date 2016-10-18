@@ -120,7 +120,7 @@ namespace BangazonAPI.Controllers
             }
 
             //Return succesfull update
-            return new StatusCodeResult(StatusCodes.Status201Created);
+            return new StatusCodeResult(StatusCodes.Status202Accepted);
         }
 
         // DELETE api/values/5
@@ -149,7 +149,7 @@ namespace BangazonAPI.Controllers
                 return new StatusCodeResult(StatusCodes.Status403Forbidden);
             }
 
-            return Ok(productToDelete);
+            return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
         private bool ProductExists(int id)
         {

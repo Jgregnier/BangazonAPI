@@ -32,6 +32,7 @@ namespace BangazonAPI.Data
             modelBuilder.Entity<PaymentType>()
                 .Property(b => b.DateCreated)
                 .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+
         }
     }
 }

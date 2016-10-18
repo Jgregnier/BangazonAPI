@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -9,32 +9,32 @@ namespace BangazonAPI.Controllers
 {
     [Produces("application/json")]
     [Route("[controller]")]
-    public class CustomersController : Controller
+    public class LineItemsController : Controller
     {
         private BangazonContext context;
 
-        public CustomersController(BangazonContext ctx)
+        public LineItemsController(BangazonContext ctx)
         {
             context = ctx;
         }
 
-        // GET /Customers
+        // GET /LineItems
         [HttpGet]
         public IActionResult Get()
         {
-            IQueryable<object> customers = from customer in context.Customer select customer;
+            IQueryable<object> lineItems = from lineItem in context.LineItem select lineItem;
 
-            if (customers == null)
+            if (lineItems == null)
             {
                 return NotFound();
             }
 
-            return Ok(customers);
+            return Ok(lineItems);
 
         }
 
-        // GET /Customers/5
-        [HttpGet("{id}", Name = "GetCustomer")]
+        // GET /LineItem/5
+        [HttpGet("{id}", Name = "GetLineItem")]
         public IActionResult Get([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -44,14 +44,14 @@ namespace BangazonAPI.Controllers
 
             try
             {
-                Customer customer = context.Customer.Single(m => m.CustomerId == id);
+                LineItem lineItem = context.LineItem.Single(m => m.LineItemId == id);
 
-                if (customer == null)
+                if (lineItem == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(customer);
+                return Ok(lineItem);
             }
             catch (System.InvalidOperationException ex)
             {
@@ -60,39 +60,33 @@ namespace BangazonAPI.Controllers
 
 
         }
-        // POST /Customers
+        // POST /LineItem
         [HttpPost]
-        public IActionResult Post([FromBody] Customer customer)
+        public IActionResult Post([FromBody] LineItem lineItem)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            context.Customer.Add(customer);
+            context.LineItem.Add(lineItem);
+
             try
             {
                 context.SaveChanges();
             }
             catch (DbUpdateException)
             {
-                if (CustomerExists(customer.CustomerId))
-                {
-                    return new StatusCodeResult(StatusCodes.Status409Conflict);
-                }
-                else
-                {
-                    throw;
-                }
+                return new StatusCodeResult(StatusCodes.Status403Forbidden);
             }
 
-            return CreatedAtRoute("GetCustomer", new { id = customer.CustomerId }, customer);
+            return CreatedAtRoute(new { id = lineItem.LineItemId }, lineItem);
         }
 
         // PUT Customer/5
-       [HttpPut("{id}")]
-       public IActionResult Put([FromBody] Customer customer, [FromRoute] int id)
-       {
+        [HttpPut("{id}")]
+        public IActionResult Put([FromBody] LineItem lineItem, [FromRoute] int id)
+        {
             //Check for bad model
             if (!ModelState.IsValid)
             {
@@ -100,15 +94,15 @@ namespace BangazonAPI.Controllers
             }
 
             //Check for bad ID on Put object
-            if(customer.CustomerId != id)
+            if (lineItem.LineItemId != id)
             {
-                return BadRequest(customer);
+                return BadRequest(lineItem);
             }
 
             //Update the customer to the context
             try
             {
-                context.Customer.Update(customer);
+                context.LineItem.Update(lineItem);
             }
             catch (DbUpdateException)
             {
@@ -129,40 +123,41 @@ namespace BangazonAPI.Controllers
 
             //Return successful creation
             return new StatusCodeResult(StatusCodes.Status202Accepted);
-       }
+        }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute]int id)
         {
 
-            Customer customerToDelete = null;
+            LineItem lineItemToDelete = null;
 
             try
             {
-                customerToDelete = context.Customer.Single(m => m.CustomerId == id);
+                lineItemToDelete = context.LineItem.Single(m => m.LineItemId == id);
             }
             catch (System.InvalidOperationException)
             {
                 return NotFound();
             }
 
-            context.Customer.Remove(customerToDelete);
+            context.LineItem.Remove(lineItemToDelete);
 
             try
             {
                 context.SaveChanges();
             }
-                catch (DbUpdateException)
+            catch (DbUpdateException)
             {
                 return new StatusCodeResult(StatusCodes.Status403Forbidden);
             }
-        
+
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
-        private bool CustomerExists(int id)
+        private bool LineItemExists(int id)
         {
-            return context.Customer.Count(e => e.CustomerId == id) > 0;
+            return context.LineItem.Count(e => e.LineItemId == id) > 0;
         }
     }
 }
+

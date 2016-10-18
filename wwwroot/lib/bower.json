@@ -1,0 +1,23 @@
+{
+  "name": "lib",
+  "authors": [
+    "Grant Regnier"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "firebase": "^3.2.0"
+  }
+}

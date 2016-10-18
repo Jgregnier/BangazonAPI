@@ -119,7 +119,7 @@ namespace BangazonAPI.Controllers
             }
 
             //Return successful creation
-            return new StatusCodeResult(StatusCodes.Status201Created);
+            return new StatusCodeResult(StatusCodes.Status202Accepted);
         }
 
         // DELETE orders/5
@@ -145,10 +145,10 @@ namespace BangazonAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                return new StatusCodeResult(StatusCodes.Status403Forbidden);
+                return new StatusCodeResult(StatusCodes.Status204NoContent);
             }
 
-            return Ok(orderToDelete);
+            return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
         private bool OrderExists(int id)
         {

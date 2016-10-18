@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angular App</title>
+</head>
+<!-- TODO: Initialize our app -->
+<body ng-app="BangazonApp">
+  <div ng-view="MainView">
+  </div>
+<!-- 3rd party files -->
+<script type="text/javascript" src="lib/bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="lib/bower_components/angular-route/angular-route.min.js"></script>
+
+
+<!-- angular module -->
+<script type="text/javascript" src="app/app.js"></script>
+
+<!-- Providers -->
+<script type="text/javascript" src="app/factories/ProductsFactory.js"></script>
+<script type="text/javascript" src="app/factories/CustomerFactory.js"></script>
+
+<!-- controllers -->
+<script type="text/javascript" src="app/controllers/ProductsController.js"></script>
+<script type="text/javascript" src="app/controllers/CustomersController.js"></script>
+
+</body>
+</html>

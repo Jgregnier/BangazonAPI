@@ -1,0 +1,18 @@
+﻿
+    <button ng-click="getProducts()">Get All products</button>
+    <button ng-click="postProduct()">Post this product</button>
+    <button ng-click="putProduct()">Replace an old product</button>
+    <p>Make Your own product</p>
+    <input type="text" ng-model="newProdDescription" placeholder="description" />
+    <input type="number" ng-model="newProdPrice" placeholder="Price" />
+    <input type="number" ng-model="newProdID" placeholder="ID" />
+    <p>Overwrite an old product</p>
+    <input type="text" ng-model="editProdDescription" placeholder="description" />
+    <input type="number" ng-model="editProdPrice" placeholder="Price" />
+    <input type="number" ng-model="editProdID" placeholder="ID" />
+    <div ng-repeat="product in products">
+        <button ng-click="deleteProduct()">Delete this product</button>
+        <div>Product : {{product.description}}</div>
+        <div>Price : {{product.price}}</div>
+        <div>Product id :{{product.productId}}</div> <br />
+    </div>
